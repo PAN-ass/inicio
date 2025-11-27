@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Colores Aleatorios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 32px;
+            letter-spacing: -0.5px;
+        }
+
+        /* Div grande que muestra el color */
+        .color-display {
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            background-color: #667eea;
+            margin-bottom: 30px;
+            transition: background-color 0.3s ease-in-out;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efecto de animación al cambiar color */
+        .color-display.changing {
+            animation: colorFlash 0.3s ease-out;
+        }
+
+        @keyframes colorFlash {
+            0% {
+                transform: scale(1);
+                filter: brightness(1.2);
+            }
+            50% {
+                transform: scale(1.02);
+                filter: brightness(1.1);
+            }
+            100% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+        }
+
+        /* Contenedor para el código hexadecimal */
+        .code-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid #e0e0e0;
+        }
+
+        .code-display {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .code-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        #colorCode {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        /* Contenedor de botones */
+        .button-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Botón Generar Color */
+        #generateBtn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        #generateBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        #generateBtn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Botón Copiar */
+        #copyBtn {
+            background: #4CAF50;
+            color: white;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        #copyBtn:hover {
+            background: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        #copyBtn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Notificación de copia */
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Info box */
+        .info-box {
+            background: #f0f7ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #1565c0;
+            margin-top: 25px;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+
+            .color-display {
+                height: 250px;
+            }
+
+            button {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            .code-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .code-display {
+                width: 100%;
+            }
+
+            .copy-notification {
+                right: 10px;
+                left: 10px;
+                max-width: calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Generador de Colores Aleatorios</h1>
+
+        <!-- Div grande que muestra el color actual -->
+        <div class="color-display" id="colorDisplay"></div>
+
+        <!-- Código hexadecimal del color actual -->
+        <div class="code-container">
+            <div class="code-display">
+                <span class="code-label">Código del Color</span>
+                <span id="colorCode">#667eea</span>
+            </div>
+            <!-- Botón para copiar el código -->
+            <button id="copyBtn">📋 Copiar</button>
+        </div>
+
+        <!-- Botón para generar color -->
+        <div class="button-container">
+            <button id="generateBtn">✨ Generar Color</button>
+        </div>
+
+        <!-- Información -->
+        <div class="info-box">
+            <strong>💡 Tips:</strong><br>
+            • Haz clic en "Generar Color" para obtener un nuevo color aleatorio<br>
+            • Copia el código hexadecimal para usarlo en tu proyecto<br>
+            • Presiona Enter o barra espaciadora para generar rápidamente
+        </div>
+    </div>
+
+    <!-- Notificación de copia -->
+    <div class="copy-notification" id="copyNotification">
+        ✓ ¡Código copiado al portapapeles!
+    </div>
+
+    <script>
+        /**
+         * Función que genera un color hexadecimal aleatorio
+         * Retorna un string en formato #RRGGBB (ej: #A3C2F1)
+         * 
+         * @returns {string} Color en formato hexadecimal
+         */
+        function generarColorAleatorio() {
+            // Generar números aleatorios entre 0 y 255 para RGB
+            // Math.floor(Math.random() * 256) genera un número entre 0-255
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+
+            // Convertir a hexadecimal y agregar el símbolo #
+            // toString(16) convierte el número a base 16 (hexadecimal)
+            // padStart(2, '0') asegura que siempre tenga 2 dígitos (ej: "0a" en lugar de "a")
+            const hex = '#' + 
+                r.toString(16).padStart(2, '0') + 
+                g.toString(16).padStart(2, '0') + 
+                b.toString(16).padStart(2, '0');
+
+            // Retornar el color en mayúsculas para una mejor presentación
+            return hex.toUpperCase();
+        }
+
+        /**
+         * Función que actualiza el color mostrado
+         * - Genera un color aleatorio
+         * - Cambia el fondo del div
+         * - Actualiza el texto con el código hexadecimal
+         * - Aplica animación de cambio
+         */
+        function cambiarColor() {
+            // Generar un nuevo color aleatorio
+            const nuevoColor = generarColorAleatorio();
+
+            // Obtener referencias a los elementos del DOM
+            const colorDisplay = document.getElementById('colorDisplay');
+            const colorCode = document.getElementById('colorCode');
+
+            // Agregar clase de animación al div
+            colorDisplay.classList.add('changing');
+
+            // Cambiar el color de fondo del div
+            colorDisplay.style.backgroundColor = nuevoColor;
+
+            // Actualizar el texto con el nuevo código hexadecimal
+            colorCode.textContent = nuevoColor;
+
+            // Remover la clase de animación después de que termine
+            // setTimeout espera 300ms (duración de la animación) antes de remover la clase
+            setTimeout(() => {
+                colorDisplay.classList.remove('changing');
+            }, 300);
+        }
+
+        /**
+         * Función para copiar el código hexadecimal al portapapeles
+         * - Obtiene el código actual
+         * - Lo copia usando la API del navegador
+         * - Muestra una notificación visual
+         */
+        function copiarAlPortapapeles() {
+            // Obtener el código hexadecimal actual
+            const colorCode = document.getElementById('colorCode').textContent;
+
+            // Usar la API moderna del navegador para copiar texto
+            // navigator.clipboard.writeText() es más seguro y moderno que otras métodos
+            navigator.clipboard.writeText(colorCode).then(() => {
+                // Si la copia es exitosa, mostrar notificación
+                mostrarNotificacion();
+            }).catch(() => {
+                // Si hay error, usar el método alternativo (fallback)
+                copiarAlPortapapelesFallback(colorCode);
+            });
+        }
+
+        /**
+         * Función alternativa para copiar al portapapeles (para navegadores antiguos)
+         * Crea un elemento temporal para copiar el texto
+         * 
+         * @param {string} texto - El texto a copiar
+         */
+        function copiarAlPortapapelesFallback(texto) {
+            // Crear un elemento textarea temporal
+            const textarea = document.createElement('textarea');
+            
+            // Asignar el texto a copiar
+            textarea.value = texto;
+            
+            // Agregar el textarea al DOM (invisible)
+            document.body.appendChild(textarea);
+            
+            // Seleccionar el texto
+            textarea.select();
+            
+            // Ejecutar el comando copy
+            try {
+                document.execCommand('copy');
+                mostrarNotificacion();
+            } catch (err) {
+                console.error('Error al copiar:', err);
+            }
+            
+            // Remover el textarea del DOM
+            document.body.removeChild(textarea);
+        }
+
+        /**
+         * Función para mostrar notificación visual de copia exitosa
+         * - Muestra el mensaje por 2 segundos
+         * - Desaparece suavemente
+         */
+        function mostrarNotificacion() {
+            // Obtener el elemento de notificación
+            const notificacion = document.getElementById('copyNotification');
+
+            // Agregar la clase 'show' para mostrar la notificación
+            notificacion.classList.add('show');
+
+            // Remover la clase después de 2 segundos (2000 milisegundos)
+            setTimeout(() => {
+                notificacion.classList.remove('show');
+            }, 2000);
+        }
+
+        /**
+         * Event listeners - Vincular eventos a elementos del DOM
+         */
+
+        // Botón Generar Color
+        document.getElementById('generateBtn').addEventListener('click', cambiarColor);
+
+        // Botón Copiar
+        document.getElementById('copyBtn').addEventListener('click', copiarAlPortapapeles);
+
+        // Permitir generar color con Enter o barra espaciadora
+        document.addEventListener('keypress', function(event) {
+            // Verificar que no estemos escribiendo en un input
+            if (event.key === 'Enter' && document.activeElement.tagName !== 'INPUT') {
+                cambiarColor();
+            }
+        });
+
+        /**
+         * Inicialización - Generar un color al cargar la página
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            cambiarColor();
+        });
+    </script>
+</body>
+</html>
