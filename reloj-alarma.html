@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reloj Digital con Alarma</title>
+    <link rel="stylesheet" href="reloj-alarma.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Reloj Digital con Alarma</h1>
+
+        <!-- Sección del Reloj -->
+        <div class="reloj-section">
+            <!-- Display del reloj -->
+            <div class="reloj-display" id="relojDisplay">
+                00:00:00
+            </div>
+
+            <!-- Display de la fecha -->
+            <div class="fecha-display" id="fechaDisplay">
+                Cargando fecha...
+            </div>
+        </div>
+
+        <!-- Sección de Alarma -->
+        <div class="alarma-section">
+            <h2>Configurar Alarma</h2>
+
+            <!-- Control de hora para alarma -->
+            <div class="alarma-input-group">
+                <label for="horaAlarma">Selecciona hora de alarma:</label>
+                <input type="time" id="horaAlarma" class="time-input">
+            </div>
+
+            <!-- Botones de control -->
+            <div class="alarma-buttons">
+                <button id="establecerBtn" class="btn btn-primary">Establecer Alarma</button>
+                <button id="cancelarBtn" class="btn btn-secondary">Cancelar Alarma</button>
+            </div>
+
+            <!-- Mensaje de estado de alarma -->
+            <div class="alarma-status" id="alarmaStatus">
+                <span class="status-indicator inactive" id="statusIndicator"></span>
+                <span class="status-text" id="statusText">Sin alarma activa</span>
+            </div>
+        </div>
+
+        <!-- Área de notificación -->
+        <div class="notificacion" id="notificacion">
+            <div class="notificacion-content">
+                <h3>¡ALARMA!</h3>
+                <p id="notificacionTexto">La alarma ha sonado</p>
+                <button id="cerrarAlarmaBtn" class="btn btn-danger">Cerrar</button>
+            </div>
+        </div>
+
+        <!-- Fondo de overlay para la alarma -->
+        <div class="alarma-overlay" id="alarmaOverlay"></div>
+    </div>
+
+    <script src="reloj-alarma.js"></script>
+</body>
+</html>
