@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador de Texto</title>
+    <link rel="stylesheet" href="analizador-texto.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <!-- Encabezado -->
+        <header class="encabezado">
+            <h1>📝 Analizador de Texto</h1>
+            <p class="subtitulo">Analiza tu texto en tiempo real y obtén estadísticas detalladas</p>
+        </header>
+
+        <div class="contenedor-principal-flex">
+            <!-- Sección del Editor -->
+            <section class="seccion-editor">
+                <div class="editor-contenedor">
+                    <label for="textArea" class="label-textarea">Escribe o pega tu texto aquí:</label>
+                    <textarea 
+                        id="textArea" 
+                        class="textarea-principal" 
+                        placeholder="Comienza a escribir o pega tu texto aquí para ver las estadísticas..."
+                        spellcheck="false"
+                    ></textarea>
+
+                    <!-- Botones de acción -->
+                    <div class="botones-accion">
+                        <button id="limpiarBtn" class="btn btn-secundario">
+                            <span class="icono">🗑️</span>
+                            <span>Limpiar</span>
+                        </button>
+                        <button id="copiarEstadisticasBtn" class="btn btn-primario">
+                            <span class="icono">📋</span>
+                            <span>Copiar Estadísticas</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de Estadísticas -->
+            <section class="seccion-estadisticas">
+                <h2 class="titulo-estadisticas">Estadísticas</h2>
+
+                <div class="grid-estadisticas">
+                    <!-- Tarjeta: Caracteres (con espacios) -->
+                    <div class="tarjeta-estadistica caracteres-totales">
+                        <div class="icono-tarjeta">📊</div>
+                        <div class="contenido-tarjeta">
+                            <h3 class="nombre-metrica">Caracteres (con espacios)</h3>
+                            <div class="valor-metrica" id="caracteresTotales">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta: Caracteres (sin espacios) -->
+                    <div class="tarjeta-estadistica caracteres-sin-espacios">
+                        <div class="icono-tarjeta">✏️</div>
+                        <div class="contenido-tarjeta">
+                            <h3 class="nombre-metrica">Caracteres (sin espacios)</h3>
+                            <div class="valor-metrica" id="caracteresSinEspacios">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta: Palabras -->
+                    <div class="tarjeta-estadistica palabras">
+                        <div class="icono-tarjeta">💬</div>
+                        <div class="contenido-tarjeta">
+                            <h3 class="nombre-metrica">Palabras</h3>
+                            <div class="valor-metrica" id="numeroPalabras">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta: Oraciones -->
+                    <div class="tarjeta-estadistica oraciones">
+                        <div class="icono-tarjeta">📌</div>
+                        <div class="contenido-tarjeta">
+                            <h3 class="nombre-metrica">Oraciones</h3>
+                            <div class="valor-metrica" id="numeroOraciones">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta: Tiempo de lectura -->
+                    <div class="tarjeta-estadistica tiempo-lectura">
+                        <div class="icono-tarjeta">⏱️</div>
+                        <div class="contenido-tarjeta">
+                            <h3 class="nombre-metrica">Tiempo de lectura</h3>
+                            <div class="valor-metrica" id="tiempoLectura">0 seg</div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta: Promedio de palabras por oración -->
+                    <div class="tarjeta-estadistica promedio">
+                        <div class="icono-tarjeta">📈</div>
+                        <div class="contenido-tarjeta">
+                            <h3 class="nombre-metrica">Promedio de palabras/oración</h3>
+                            <div class="valor-metrica" id="promedioFPO">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel de información adicional -->
+                <div class="panel-informacion">
+                    <p class="texto-info">ℹ️ <strong>Nota:</strong> Las estadísticas se actualizan en tiempo real mientras escribes.</p>
+                    <p class="texto-info">El tiempo de lectura se calcula basado en <strong>200 palabras por minuto</strong>.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Notificación de copia -->
+        <div class="notificacion" id="notificacion">
+            <span class="notificacion-texto">✓ Estadísticas copiadas al portapapeles</span>
+        </div>
+    </div>
+
+    <script src="analizador-texto.js"></script>
+</body>
+</html>

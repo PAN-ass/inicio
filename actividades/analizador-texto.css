@@ -1,0 +1,523 @@
+/* ========================================
+   ESTILOS ANALIZADOR DE TEXTO
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 30px 20px;
+}
+
+/* ========== CONTENEDOR PRINCIPAL ========== */
+
+.contenedor-principal {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ========== ENCABEZADO ========== */
+
+.encabezado {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.encabezado h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+}
+
+.subtitulo {
+    font-size: 18px;
+    opacity: 0.95;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* ========== LAYOUT PRINCIPAL ========== */
+
+.contenedor-principal-flex {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* ========== SECCIÓN DEL EDITOR ========== */
+
+.seccion-editor {
+    animation: fadeInLeft 0.6s ease-out 0.2s both;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.editor-contenedor {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.label-textarea {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ========== TEXTAREA ========== */
+
+.textarea-principal {
+    flex: 1;
+    padding: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #333;
+    resize: none;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    background: #fafafa;
+}
+
+.textarea-principal:hover {
+    border-color: #667eea;
+    background: white;
+}
+
+.textarea-principal:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.textarea-principal::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* ========== BOTONES DE ACCIÓN ========== */
+
+.botones-accion {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: inherit;
+}
+
+.btn-primario {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    flex: 1;
+    justify-content: center;
+}
+
+.btn-primario:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primario:active {
+    transform: translateY(0);
+}
+
+.btn-secundario {
+    background: #f0f0f0;
+    color: #333;
+    border: 2px solid #ddd;
+    flex: 1;
+    justify-content: center;
+}
+
+.btn-secundario:hover {
+    background: #e8e8e8;
+    border-color: #667eea;
+    color: #667eea;
+    transform: translateY(-2px);
+}
+
+.btn-secundario:active {
+    transform: translateY(0);
+}
+
+.icono {
+    font-size: 16px;
+}
+
+/* ========== SECCIÓN DE ESTADÍSTICAS ========== */
+
+.seccion-estadisticas {
+    animation: fadeInRight 0.6s ease-out 0.2s both;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.titulo-estadisticas {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+}
+
+/* ========== GRID DE ESTADÍSTICAS ========== */
+
+.grid-estadisticas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+/* ========== TARJETAS DE ESTADÍSTICA ========== */
+
+.tarjeta-estadistica {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    border-left: 5px solid;
+    animation: scaleIn 0.5s ease-out both;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.tarjeta-estadistica:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Colores diferenciados para cada métrica */
+
+.tarjeta-estadistica.caracteres-totales {
+    border-left-color: #ff6b6b;
+    background: linear-gradient(135deg, #fff 0%, #ffe0e0 100%);
+}
+
+.tarjeta-estadistica.caracteres-sin-espacios {
+    border-left-color: #4ecdc4;
+    background: linear-gradient(135deg, #fff 0%, #e0f8f5 100%);
+}
+
+.tarjeta-estadistica.palabras {
+    border-left-color: #95e1d3;
+    background: linear-gradient(135deg, #fff 0%, #e8f8f4 100%);
+}
+
+.tarjeta-estadistica.oraciones {
+    border-left-color: #feca57;
+    background: linear-gradient(135deg, #fff 0%, #fff9e6 100%);
+}
+
+.tarjeta-estadistica.tiempo-lectura {
+    border-left-color: #48dbfb;
+    background: linear-gradient(135deg, #fff 0%, #e0f7ff 100%);
+}
+
+.tarjeta-estadistica.promedio {
+    border-left-color: #9b59b6;
+    background: linear-gradient(135deg, #fff 0%, #f3e0ff 100%);
+}
+
+/* ========== CONTENIDO DE TARJETA ========== */
+
+.icono-tarjeta {
+    font-size: 32px;
+    flex-shrink: 0;
+    animation: rotate 0.6s ease-out;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(-10deg);
+        opacity: 0;
+    }
+    to {
+        transform: rotate(0);
+        opacity: 1;
+    }
+}
+
+.contenido-tarjeta {
+    flex: 1;
+}
+
+.nombre-metrica {
+    font-size: 12px;
+    color: #999;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.valor-metrica {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    transition: all 0.3s ease;
+    animation: countUp 0.5s ease-out;
+}
+
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.valor-metrica.actualizado {
+    animation: countUp 0.5s ease-out;
+}
+
+/* ========== PANEL DE INFORMACIÓN ========== */
+
+.panel-informacion {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.texto-info {
+    color: white;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+}
+
+.texto-info:last-child {
+    margin-bottom: 0;
+}
+
+.texto-info strong {
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== NOTIFICACIÓN ========== */
+
+.notificacion {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(150px);
+    opacity: 0;
+    transition: all 0.4s ease;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.notificacion.mostrar {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notificacion-texto {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 1024px) {
+    .contenedor-principal-flex {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .grid-estadisticas {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .encabezado h1 {
+        font-size: 36px;
+    }
+
+    .subtitulo {
+        font-size: 16px;
+    }
+
+    .editor-contenedor {
+        padding: 20px;
+    }
+
+    .textarea-principal {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .grid-estadisticas {
+        grid-template-columns: 1fr;
+    }
+
+    .botones-accion {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .icono-tarjeta {
+        font-size: 28px;
+    }
+
+    .valor-metrica {
+        font-size: 28px;
+    }
+
+    .nombre-metrica {
+        font-size: 11px;
+    }
+
+    .notificacion {
+        bottom: 20px;
+        right: 20px;
+        left: 20px;
+        width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 20px 15px;
+    }
+
+    .encabezado {
+        margin-bottom: 30px;
+    }
+
+    .encabezado h1 {
+        font-size: 28px;
+    }
+
+    .subtitulo {
+        font-size: 14px;
+    }
+
+    .titulo-estadisticas {
+        font-size: 20px;
+    }
+
+    .contenedor-principal-flex {
+        gap: 20px;
+    }
+
+    .tarjeta-estadistica {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .icono-tarjeta {
+        font-size: 24px;
+    }
+
+    .valor-metrica {
+        font-size: 24px;
+    }
+
+    .nombre-metrica {
+        font-size: 10px;
+    }
+
+    .panel-informacion {
+        padding: 15px;
+    }
+
+    .texto-info {
+        font-size: 12px;
+    }
+}
