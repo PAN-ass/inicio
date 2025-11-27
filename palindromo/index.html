@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Detector de Palíndromos</title>
+	<style>
+		body { font-family: Arial, Helvetica, sans-serif; max-width:640px; margin:40px auto; padding:0 16px; }
+		label { display:block; margin-bottom:8px; font-weight:600; }
+		input { width:100%; padding:8px; font-size:16px; box-sizing:border-box; }
+		button { margin-top:12px; padding:8px 12px; font-size:16px; }
+		#resultado { margin-top:16px; font-weight:600; }
+	</style>
+</head>
+<body>
+	<h1>Detector de Palíndromos</h1>
+
+	<label for="texto">Escribe una palabra o frase</label>
+	<input id="texto" type="text" placeholder="ej. Anilina, Reconocer, A mamá Roma" />
+	<button id="btnComparar">Comparar</button>
+
+	<p id="resultado" aria-live="polite"></p>
+
+	<!-- Carga la lógica desde palindromo.js (archivo proporcionado) -->
+	<script src="palindromo.js"></script>
+	<script>
+		const input = document.getElementById('texto');
+		const btn = document.getElementById('btnComparar');
+		const resultado = document.getElementById('resultado');
+
+		function mostrarResultado() {
+			const texto = input.value.trim();
+			if (texto === '') {
+				resultado.textContent = 'Introduce un texto para comparar.';
+				resultado.style.color = 'gray';
+				return;
+			}
+
+			// usa la función esPalindromo del archivo palindromo.js
+			const es = esPalindromo(texto);
+			if (es) {
+				resultado.textContent = `"${texto}" es un palíndromo.`;
+				resultado.style.color = 'green';
+			} else {
+				resultado.textContent = `"${texto}" no es un palíndromo.`;
+				resultado.style.color = 'red';
+			}
+		}
+
+		btn.addEventListener('click', mostrarResultado);
+		input.addEventListener('keydown', (e) => { if (e.key === 'Enter') mostrarResultado(); });
+	</script>
+</body>
+</html>
