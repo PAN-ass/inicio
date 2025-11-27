@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedax — Explorador Pokémon</title>
+    <style>
+        :root{--accent:#ef5350;--muted:#666}
+        body { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; padding: 24px; max-width:1100px; margin:0 auto; }
+        header { display:flex; gap:12px; align-items:center; justify-content:space-between; margin-bottom:18px }
+        h1{font-size:20px;margin:0}
+        .controls{display:flex;gap:8px;align-items:center}
+        input[type="search"]{padding:8px 10px;font-size:14px;width:320px;border:1px solid #ddd;border-radius:6px}
+        button{background:var(--accent);color:white;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
+        button[disabled]{opacity:.5;cursor:default}
+
+        /* Grid */
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:18px}
+        .card{background:#fff;border:1px solid #eee;border-radius:10px;padding:12px;text-align:center;box-shadow:0 6px 12px rgba(0,0,0,0.04);cursor:pointer}
+        .card img{width:96px;height:96px;object-fit:contain}
+        .name{margin-top:8px;font-weight:700;text-transform:capitalize}
+
+        /* Pagination */
+        .pagination{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:16px}
+        .page-info{color:var(--muted)}
+
+        /* Modal */
+        .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;padding:20px}
+        .modal{background:white;border-radius:10px;max-width:720px;width:100%;padding:16px;box-shadow:0 16px 40px rgba(0,0,0,.3);}
+        .modal .header{display:flex;gap:12px;align-items:center}
+        .modal img{width:140px;height:140px}
+        .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+        .chip{background:#f1f1f1;padding:6px 8px;border-radius:999px;font-size:13px}
+        .close{margin-left:auto;background:#eee;color:#333;border-radius:8px;padding:6px 8px}
+
+        /* Responsive */
+        @media (max-width:520px){input[type="search"]{width:160px}.modal img{width:110px;height:110px}}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pokedax — Explorador Pokémon</h1>
+        <div class="controls">
+            <input id="searchInput" type="search" placeholder="Buscar por nombre o id (ej: pikachu, 25)">
+            <button id="searchBtn">Buscar</button>
+            <button id="resetBtn" title="Volver a la lista">Volver a la lista</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="grid" class="grid" aria-live="polite"></div>
+
+        <div class="pagination">
+            <button id="prevBtn">« Anterior</button>
+            <div class="page-info" id="pageInfo"></div>
+            <button id="nextBtn">Siguiente »</button>
+        </div>
+    </main>
+
+    <!-- Modal detalles -->
+    <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
+        <div class="modal" role="document">
+            <div class="header">
+                <h2 id="modalName" style="text-transform:capitalize;margin:0"></h2>
+                <button id="closeModal" class="close">Cerrar</button>
+            </div>
+            <div style="display:flex;gap:18px;margin-top:12px;align-items:flex-start">
+                <img id="modalImg" src="" alt="">
+                <div style="flex:1">
+                    <p id="modalId"></p>
+                    <div class="chips" id="modalTypes"></div>
+                    <div style="margin-top:12px">
+                        <strong>Habilidades:</strong>
+                        <div id="modalAbilities" class="chips"></div>
+                    </div>
+                    <div style="margin-top:12px">
+                        <strong>Estadísticas:</strong>
+                        <div id="modalStats"></div>
+                    </div>
+                    <div style="margin-top:8px;color:var(--muted)">
+                        <span id="modalHeight"></span> • <span id="modalWeight"></span> • <span id="modalExp"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+</body>
+</html>
