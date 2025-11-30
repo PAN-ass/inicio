@@ -1,44 +1,282 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Calculadora simple</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller de Programación con IA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+        .project-card:nth-child(7) { animation-delay: 0.7s; }
+        .project-card:nth-child(8) { animation-delay: 0.8s; }
+        .project-card:nth-child(9) { animation-delay: 0.9s; }
+        .project-card:nth-child(10) { animation-delay: 1s; }
+        .project-card:nth-child(11) { animation-delay: 1.1s; }
+        .project-card:nth-child(12) { animation-delay: 1.2s; }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .project-name {
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .project-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+
+        .project-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .project-link:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .project-card {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <main class="calculator" role="application" aria-label="Calculadora">
-    <div class="screen" aria-live="polite">
-      <div id="expression" class="expression" aria-hidden="false">0</div>
-      <div id="result" class="result" aria-live="polite"> </div>
+    <div class="container">
+        <header>
+            <h1>🚀 Taller de Programación con IA</h1>
+            <p class="subtitle">Explora nuestros proyectos didácticos</p>
+        </header>
+
+        <div class="projects-grid">
+            <!-- Analizador de Texto -->
+            <div class="project-card">
+                <div class="project-icon">📝</div>
+                <div class="project-name">Analizador de Texto</div>
+                <div class="project-description">Herramienta para analizar y procesar texto, contar palabras y caracteres.</div>
+                <a href="analizador-texto/analizador-texto.html" class="project-link">Ver Proyecto →</a>
+            </div>
+
+            <!-- Calculadora -->
+            <div class="project-card">
+                <div class="project-icon">🧮</div>
+                <div class="project-name">Calculadora</div>
+                <div class="project-description">Calculadora interactiva con operaciones matemáticas básicas y avanzadas.</div>
+                <a href="calculadora/index.html" class="project-link">Ver Proyecto →</a>
+            </div>
+
+            <!-- Generador de Colores -->
+            <div class="project-card">
+                <div class="project-icon">🎨</div>
+                <div class="project-name">Generador de Colores</div>
+                <div class="project-description">Genera combinaciones de colores aleatorios con códigos hexadecimales.</div>
+                <a href="colores/generador-colores.html" class="project-link">Ver Proyecto →</a>
+            </div>
+
+            <!-- Convertidor de Temperaturas -->
+            <div class="project-card">
+                <div class="project-icon">🌡️</div>
+                <div class="project-name">Convertidor de Temperaturas</div>
+                <div class="project-description">Convierte entre Celsius, Fahrenheit y Kelvin de forma instantánea.</div>
+                <a href="temperatura/conversor-temperaturas.html" class="project-link">Ver Proyecto →</a>
+            </div>
+
+            <!-- DOM Manipulation -->
+            <div class="project-card">
+                <div class="project-icon">⚙️</div>
+                <div class="project-name">Manipulación del DOM</div>
+                <div class="project-description">Ejemplos prácticos de manipulación del DOM con JavaScript.</div>
+                <a href="dom-2/index.html" class="project-link">Ver Proyecto →</a>
+            </div>
+
+            <!-- Ejercicios de Bucles -->
+            <div class="project-card">
+                <div class="project-icon">🔁</div>
+                <div class="project-name">Ejercicios de Bucles</div>
+                <div class="project-description">Aprende bucles (for, while) con ejercicios interactivos.</div>
+                <a href="ejerecicios-bucle/index.html" class="project-link">Ver Proyecto →</a>
+            </div>
+
+            <!-- Funciones -->
+            <div class="project-card">
+                <div class="project-icon">ƒ</div>
+                <div class="project-name">Funciones</div>
+                <div class="project-description">Ejemplos y ejercicios sobre funciones en JavaScript.</div>
+                <a href="funciones/index.html" class="project-link">Ver Proyecto →</a>
+            </div>
+
+            <!-- Palíndromo -->
+            <div class="project-card">
+                <div class="project-icon">🔤</div>
+                <div class="project-name">Verificador de Palíndromos</div>
+                <div class="project-description">Detecta si una palabra o frase es un palíndromo.</div>
+                <a href="palindromo/index.html" class="project-link">Ver Proyecto →</a>
+            </div>
+
+            <!-- Pokémon API -->
+            <div class="project-card">
+                <div class="project-icon">⚡</div>
+                <div class="project-name">Pokémon API</div>
+                <div class="project-description">Consumo de API para buscar información de Pokémon.</div>
+                <a href="pokemon/index.html" class="project-link">Ver Proyecto →</a>
+            </div>
+
+            <!-- Rick and Morty API -->
+            <div class="project-card">
+                <div class="project-icon">👽</div>
+                <div class="project-name">Rick and Morty API</div>
+                <div class="project-description">Explora personajes de Rick and Morty mediante una API.</div>
+                <a href="rickandmortyAPI/index.html" class="project-link">Ver Proyecto →</a>
+            </div>
+
+            <!-- Mini Proyecto Pan 1 -->
+            <div class="project-card">
+                <div class="project-icon">🍞</div>
+                <div class="project-name">Proyecto Pan 1</div>
+                <div class="project-description">Proyecto completo integrador con consumo de APIs.</div>
+                <a href="MiniproyectoPan/index.html" class="project-link">Ver Proyecto →</a>
+            </div>
+
+            <!-- Mini Proyecto Pan 2 -->
+            <div class="project-card">
+                <div class="project-icon">🥐</div>
+                <div class="project-name">Proyecto Pan 2</div>
+                <div class="project-description">Continuación del proyecto con funcionalidades avanzadas.</div>
+                <a href="MiniproyectoPan-2/index.html" class="project-link">Ver Proyecto →</a>
+            </div>
+        </div>
     </div>
-
-    <div class="keys" role="group" aria-label="Teclado de la calculadora">
-      <button class="btn btn-accent" data-action="clear" aria-label="Limpiar">C</button>
-      <button class="btn" data-action="backspace" aria-label="Borrar último">←</button>
-      <button class="btn" data-value="/" aria-label="Dividir">÷</button>
-      <button class="btn" data-value="*" aria-label="Multiplicar">×</button>
-
-      <button class="btn" data-value="7">7</button>
-      <button class="btn" data-value="8">8</button>
-      <button class="btn" data-value="9">9</button>
-      <button class="btn" data-value="-" aria-label="Restar">−</button>
-
-      <button class="btn" data-value="4">4</button>
-      <button class="btn" data-value="5">5</button>
-      <button class="btn" data-value="6">6</button>
-      <button class="btn" data-value="+" aria-label="Sumar">+</button>
-
-      <button class="btn" data-value="1">1</button>
-      <button class="btn" data-value="2">2</button>
-      <button class="btn" data-value="3">3</button>
-      <button class="btn btn-equals" data-action="equals" aria-label="Igual">=</button>
-
-      <button class="btn btn-zero" data-value="0">0</button>
-      <button class="btn" data-value=".">.</button>
-    </div>
-  </main>
-
-  <script src="app.js" defer></script>
 </body>
 </html>
